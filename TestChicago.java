@@ -56,79 +56,79 @@ public static void main(String[] args) throws IOException, InterruptedException 
 	        
 	 for (int k = 0; k < ElementCity.size(); k++) {
 	        	
-	            Thread.sleep(WAIT_TIME);
+	        Thread.sleep(WAIT_TIME);
 	            
-	            ElementCity = driver.findElements(By.className("cityBox"));            
-	            ElementCity.get(k).click();
+	        ElementCity = driver.findElements(By.className("cityBox"));            
+	        ElementCity.get(k).click();
 	            
-	            Thread.sleep(WAIT_TIME);
+	        Thread.sleep(WAIT_TIME);
 	            
-	            String actualTitle = driver.getTitle();
+	        String actualTitle = driver.getTitle();
 	                    
-	            String AllCity = driver.findElement(By.className("allCityListingsTotal")).getText();        
-	            int AllCity_int = Integer.parseInt(AllCity);   
+	        String AllCity = driver.findElement(By.className("allCityListingsTotal")).getText();        
+	        int AllCity_int = Integer.parseInt(AllCity);   
 	           
-	            int fullcheck = ini.get("main settings", "full_check", int.class);
+	        int fullcheck = ini.get("main settings", "full_check", int.class);
 	            
-	            if (fullcheck != 0) {   	
+	        if (fullcheck != 0) {   	
 	            
-	                String AllCityNum_str = driver.findElement(By.className("allCityListingsTotal")).getText();
-	                AllCityNum_str = AllCityNum_str.replaceAll("[^\\d.]", "");  
-	                int AllCityNum_int = Integer.parseInt(AllCityNum_str);
-	                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);    
-	                int AllCityNumByZip_int3 = 0;
+	            String AllCityNum_str = driver.findElement(By.className("allCityListingsTotal")).getText();
+	            AllCityNum_str = AllCityNum_str.replaceAll("[^\\d.]", "");  
+	            int AllCityNum_int = Integer.parseInt(AllCityNum_str);
+	            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);    
+	            int AllCityNumByZip_int3 = 0;
 	                
-	                Thread.sleep(WAIT_TIME);
+	            Thread.sleep(WAIT_TIME);
 	                
-	                List <WebElement> Element = driver.findElements(By.className("zipNameBox"));         
+	            List <WebElement> Element = driver.findElements(By.className("zipNameBox"));         
 	                
-	                for (int j = 0; j < Element.size(); j++) {
+	            for (int j = 0; j < Element.size(); j++) {
 	                	
-	                    Thread.sleep(WAIT_TIME);
+	                Thread.sleep(WAIT_TIME);
 	                    
-	                    Element = driver.findElements(By.className("zipNameBox"));    
+	                Element = driver.findElements(By.className("zipNameBox"));    
 	                    
-	                    Thread.sleep(WAIT_TIME);   
+	                Thread.sleep(WAIT_TIME);   
 	                    
-	                    String AllCityNum_str2 = Element.get(j).getText();                 
-	                    Element.get(j).click();
+	                String AllCityNum_str2 = Element.get(j).getText();                 
+	                Element.get(j).click();
 	                    
-	                    Thread.sleep(WAIT_TIME);
+	                Thread.sleep(WAIT_TIME);
 	                    
-	                    String AllCityNum_str1 = driver.findElement(By.className("listingsTotal")).getText();
-	                    AllCityNum_str1 = AllCityNum_str1.replaceAll("[^\\d.]", "");
-	                    int AllCityNum_int1 = Integer.parseInt(AllCityNum_str1);
-	                    List<WebElement> drop = driver.findElements(By.className("zipListingsNum"));           
-	                    java.util.Iterator<WebElement> i = drop.iterator();
-	                    int AllCityNumByZip_int = 0;                 
+	                String AllCityNum_str1 = driver.findElement(By.className("listingsTotal")).getText();
+	                AllCityNum_str1 = AllCityNum_str1.replaceAll("[^\\d.]", "");
+	                int AllCityNum_int1 = Integer.parseInt(AllCityNum_str1);
+	                List<WebElement> drop = driver.findElements(By.className("zipListingsNum"));           
+	                java.util.Iterator<WebElement> i = drop.iterator();
+	                int AllCityNumByZip_int = 0;                 
 	                    
-	                    while(i.hasNext()) {
+	                while(i.hasNext()) {
 	                    	
-	                        Thread.sleep(WAIT_TIME);
-	                        
-	                        WebElement row = i.next();   
-	                        String AllCityNumByZip_str = row.getText().replaceAll("\\p{P}","");
-	                        AllCityNumByZip_int = Integer.parseInt(AllCityNumByZip_str) + AllCityNumByZip_int;
-	                                        }     
+	                     Thread.sleep(WAIT_TIME);
+	                       
+	                     WebElement row = i.next();   
+	                     String AllCityNumByZip_str = row.getText().replaceAll("\\p{P}","");
+	                     AllCityNumByZip_int = Integer.parseInt(AllCityNumByZip_str) + AllCityNumByZip_int;
+	                                     }     
 	                    
-	                    if (AllCityNumByZip_int == AllCityNum_int1)  {
-	                    System.out.println(actualTitle+" splitted by type zip test: "+AllCityNum_str2+" passed "+AllCityNum_int1+"=="+AllCityNumByZip_int);
-	                //  BW2.write(actualTitle+" splitted by type zip test: passed "+AllCityNum_int1+"!="+AllCityNumByZip_int+ "\n");  
+	                     if (AllCityNumByZip_int == AllCityNum_int1)  {
+	                     System.out.println(actualTitle+" splitted by type zip test: "+AllCityNum_str2+" passed "+AllCityNum_int1+"=="+AllCityNumByZip_int);
+	                 //  BW2.write(actualTitle+" splitted by type zip test: passed "+AllCityNum_int1+"!="+AllCityNumByZip_int+ "\n");  
 	         
 	                    											 } 
 	                    	else {
 			                    System.out.println(actualTitle+" splitted by type zip test: "+AllCityNum_str2+" failed "+AllCityNum_int1+"!="+AllCityNumByZip_int);
 			                    BW2.write(actualTitle+" splitted by type zip test: failed "+AllCityNum_int1+"!="+AllCityNumByZip_int+ "\n");    
 	                           	 }
-	                    AllCityNumByZip_int3 += AllCityNum_int1;
+	                     AllCityNumByZip_int3 += AllCityNum_int1;
 	                    
-	                    Thread.sleep(WAIT_TIME);   
+	                     Thread.sleep(WAIT_TIME);   
 	                    
-	                    driver.navigate().back();  
+	                     driver.navigate().back();  
 	                    
-	                    Thread.sleep(WAIT_TIME);
+	                     Thread.sleep(WAIT_TIME);
 	                                                            } 
-	                    if (AllCityNumByZip_int3 == AllCityNum_int)  {
+	                     if (AllCityNumByZip_int3 == AllCityNum_int)  {
 	                    	
 	                        System.out.println(actualTitle+" splitted by zips city test: passed "+AllCityNumByZip_int3+"=="+AllCityNum_int);
 	                  //    BW2.write(actualTitle+" splitted by zips city test: passed "+AllCityNumByZip_int3+"!="+AllCityNum_int+ "\n");  
