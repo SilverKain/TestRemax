@@ -25,9 +25,9 @@ public static void main(String[] args) throws IOException, InterruptedException 
        
        WebDriver driver = new InternetExplorerDriver();*/
        
-       System.setProperty("Webdriver.chrome.driver", "C:\\selenium-2.51.0\\chromedriver.exe");
+        System.setProperty("Webdriver.chrome.driver", "C:\\selenium-2.51.0\\chromedriver.exe");
        
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
          capabilities.setCapability("chrome.switches", Arrays.asList("--load-extension=C:\\Users\\admin\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\"));
          WebDriver driver = new ChromeDriver(capabilities);
        
@@ -40,21 +40,21 @@ public static void main(String[] args) throws IOException, InterruptedException 
          BufferedWriter BW2 = new BufferedWriter(FW);
 
          Wini ini = new Wini(new File("settings.ini"));
-	     String url = ini.get("main settings", "url", String.class);
-	     driver.get(url);
-	     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 String url = ini.get("main settings", "url", String.class);
+	 driver.get(url);
+	 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	        
-	     Thread.sleep(WAIT_TIME);
+	 Thread.sleep(WAIT_TIME);
          
-	     String totalCity = driver.findElement(By.className("listingsTotal")).getText();    
-	     String totalCity_str = totalCity.replaceAll("[^\\d.]", "");  
-	     int totalCity_int = Integer.parseInt(totalCity_str);
+	 String totalCity = driver.findElement(By.className("listingsTotal")).getText();    
+	 String totalCity_str = totalCity.replaceAll("[^\\d.]", "");  
+	 int totalCity_int = Integer.parseInt(totalCity_str);
 	       
-	     int totalCity_split = 0;
+	 int totalCity_split = 0;
 	       
-	     List <WebElement> ElementCity = driver.findElements(By.className("cityBox"));
+	 List <WebElement> ElementCity = driver.findElements(By.className("cityBox"));
 	        
-	     for (int k = 0; k < ElementCity.size(); k++) {
+	 for (int k = 0; k < ElementCity.size(); k++) {
 	        	
 	            Thread.sleep(WAIT_TIME);
 	            
