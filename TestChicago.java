@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import org.ini4j.Wini;
@@ -38,34 +37,24 @@ public static void main(String[] args) throws IOException, InterruptedException 
             
          FC.createNewFile();
          FileWriter FW = new FileWriter(TestFile);
-         
          BufferedWriter BW2 = new BufferedWriter(FW);
 
-         Scanner scanner = new Scanner (new File ("settings.ini"));
-         while (scanner.hasNextLine()) {
-        	
-        	String line = scanner.nextLine();
-        
-       
-	        Wini ini = new Wini(new File("settings.ini"));
-	        String url = ini.get("main settings", "url", String.class);
+         Wini ini = new Wini(new File("settings.ini"));
+	     String url = ini.get("main settings", "url", String.class);
+	     driver.get(url);
+	     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	        
-			driver.get(url);
-	        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	        
-	        Thread.sleep(WAIT_TIME);
-        
-         								}
+	     Thread.sleep(WAIT_TIME);
          
-	        String totalCity = driver.findElement(By.className("listingsTotal")).getText();    
-	        String totalCity_str = totalCity.replaceAll("[^\\d.]", "");  
-	        int  totalCity_int = Integer.parseInt(totalCity_str);
+	     String totalCity = driver.findElement(By.className("listingsTotal")).getText();    
+	     String totalCity_str = totalCity.replaceAll("[^\\d.]", "");  
+	     int totalCity_int = Integer.parseInt(totalCity_str);
 	       
-	        int totalCity_split = 0;
+	     int totalCity_split = 0;
 	       
-	        List <WebElement> ElementCity = driver.findElements(By.className("cityBox"));
+	     List <WebElement> ElementCity = driver.findElements(By.className("cityBox"));
 	        
-	        for (int k = 0; k < ElementCity.size(); k++) {
+	     for (int k = 0; k < ElementCity.size(); k++) {
 	        	
 	            Thread.sleep(WAIT_TIME);
 	            
@@ -79,7 +68,6 @@ public static void main(String[] args) throws IOException, InterruptedException 
 	            String AllCity = driver.findElement(By.className("allCityListingsTotal")).getText();        
 	            int AllCity_int = Integer.parseInt(AllCity);   
 	           
-	            Wini ini = new Wini(new File("settings.ini"));
 	            int fullcheck = ini.get("main settings", "full_check", int.class);
 	            
 	            if (fullcheck != 0) {   	
@@ -171,7 +159,6 @@ public static void main(String[] args) throws IOException, InterruptedException 
 						              System.out.println("all listings splitted by cities test: failed "+totalCity_split+"!="+totalCity_int);
 						              BW2.write("all listings splitted by cities test: failed "+totalCity_split+"!="+totalCity_int+ "\n");
 						             } 
-	                scanner.close();
 	                BW2.close();
 	                FW.close();
 	                if(FC.length() == 0){
